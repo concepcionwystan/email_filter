@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>CSV Generator</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.13/dist/semantic.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.13/dist/semantic.min.js"></script>    
+    <script src="https://cdn.datatables.net/1.10.19/css/dataTables.semanticui.min.css"></script>
+</head>
+
+
+
+<body>
+
+
+
+<!-- <table id = "example" class = "ui celled table">
+	<thead>
+		<tr>
+			<td>id</td>
+			<td>subscription_id</td>
+			<td>email</td>
+			<td>name</td>
+			<td>role</td>
+			<td>created_at</td>
+			<td>updated_at</td>
+		</tr>
+	</thead>
+	<tbody>
+	{%for item in data%}
+	<tr>
+		{%for column in item%}
+			<td>{{column}}</td>
+		{%endfor%}
+	</tr>
+	{%endfor%}
+	</tr>
+	</tbody>
+</table> -->
+
+<form method="GET" action="./filter">
+  <div class="ui form">
+  <div class="fields">
+    <div class="two wide field">
+      <label>Domain</label>
+      <input type="text" placeholder="@insynchq.com" name="domain">
+    </div>
+    <div class="two wide field">
+      <label>Insync version</label>
+      <input type="text" placeholder="2.5" name="version">
+    </div>
+    <div class="two wide field">
+      <label>Trial status</label>
+      <input type="text" placeholder="active" name="status">
+    </div>
+  </div>
+  <div class="fields">
+    <div class="two wide field">
+      <label>Platform version</label>
+      <input type="text" placeholder="Ubuntu 16.04" name="platform_version">
+    </div>
+    <div class="two wide field">
+      <label>License</label>
+      <input type="text" placeholder="Pro" name="license">
+    </div>
+  </div>
+  <div class="fields">
+    <div class="four wide field">
+      <select name="os" multiple="" class="ui fluid dropdown">
+        <option value="">OS</option>
+        <option value="win">Windows</option>
+        <option value="linux">Linux</option>
+        <option value="macOS">Mac OS</option>
+      </select>
+    </div>
+    <div class="inline field">
+      <div class="ui checkbox">
+        <input type="checkbox" tabindex="0" class="hidden" name="multiple">
+        <label>Multiple accounts</label>
+      </div>
+  </div>
+  </div>
+  <input type="submit" class="ui button" value="Search">
+</div>
+
+
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.semanticui.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('#example').DataTable({});
+} );
+</script>
+
+
+<script>
+	$('.ui.fluid.dropdown')
+  .dropdown();
+  console.log($('#multi-select').dropdown("get value"))
+
+  $('.ui.checkbox')
+  .checkbox()
+;
+
+
+</script>
+
+
+
+</body>
+</html>

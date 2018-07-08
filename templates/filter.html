@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>CSV Generator</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.13/dist/semantic.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.13/dist/semantic.min.js"></script>    
+    <script src="https://cdn.datatables.net/1.10.19/css/dataTables.semanticui.min.css"></script>
+</head>
+<body>
+
+
+
+<table id = "example" class = "ui celled table">
+	<thead>
+		<tr>
+			<td>id</td>
+			<td>email</td>
+			<td>name</td>
+			<td>platform</td>
+			<td>platform version</td>
+			<td>app version</td>
+		</tr>
+	</thead>
+	<tbody>
+	{%for column in data%}
+	<tr>
+		{%for item in column%}
+		<td>{{item}}</td>
+		{%endfor%}
+	</tr>
+	{%endfor%}
+	</tr>
+	</tbody>
+</table>
+
+<!-- 
+<table id = "example" class = "ui celled table">
+	<thead>
+		<tr>
+			<td>id</td>
+			<td>subscription id</td>
+			<td>type</td>
+			<td>status</td>
+		</tr>
+	</thead>
+	<tbody>
+	{%for column in data%}
+	<tr>
+		{%for item in column%}
+		<td>{{item}}</td>
+		{%endfor%}
+	</tr>
+	{%endfor%}
+	</tr>
+	</tbody>
+</table> -->
+
+
+
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.semanticui.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $('#example').DataTable({});
+} );
+</script>
+
+</body>
+
+
+
+
+
+</html>
