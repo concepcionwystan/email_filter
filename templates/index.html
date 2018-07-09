@@ -3,9 +3,8 @@
 <head>
     <title>CSV Generator</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.13/dist/semantic.min.css"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.13/dist/semantic.min.js"></script>    
-    <script src="https://cdn.datatables.net/1.10.19/css/dataTables.semanticui.min.css"></script>
+    <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+<script src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
 </head>
 
 
@@ -60,14 +59,33 @@
       <input type="text" placeholder="Ubuntu 16.04" name="platform_version">
     </div>
     <div class="two wide field">
-      <label>License</label>
-      <input type="text" placeholder="Pro" name="license">
+      <label>Start date</label>
+      <div class="ui calendar" id="rangestart">
+        <div class="ui input left icon">
+          <i class="calendar icon"></i>
+          <input type="text" placeholder="Start" name="start">
+        </div>
+      </div>
+    </div>
+    <div class="two wide field">
+      <label>End date</label>
+      <div class="ui calendar" id="rangeend">
+        <div class="ui input left icon">
+            <i class="calendar icon"></i>
+            <input type="text" placeholder="End" name="end">
+          </div>
+      </div>
     </div>
   </div>
   <div class="fields">
-    <div class="four wide field">
+    <div class="two wide field">
+      <label>License</label>
+      <input type="text" placeholder="Pro" name="license">
+    </div>
+    <div class="three wide field">
+      <label>OS</label>
       <select name="os" multiple="" class="ui fluid dropdown">
-        <option value="">OS</option>
+        <option value="">Windows</option>
         <option value="win">Windows</option>
         <option value="linux">Linux</option>
         <option value="macOS">Mac OS</option>
@@ -102,6 +120,14 @@
   .checkbox()
 ;
 
+$('#rangestart').calendar({
+  type: 'date',
+  endCalendar: $('#rangeend')
+});
+$('#rangeend').calendar({
+  type: 'date',
+  startCalendar: $('#rangestart')
+});
 
 </script>
 
