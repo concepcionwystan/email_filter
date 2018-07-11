@@ -33,27 +33,14 @@
 	</tbody>
 </table>
 
-<!-- 
-<table id = "example" class = "ui celled table">
-	<thead>
-		<tr>
-			<td>id</td>
-			<td>subscription id</td>
-			<td>type</td>
-			<td>status</td>
-		</tr>
-	</thead>
-	<tbody>
-	{%for column in data%}
-	<tr>
-		{%for item in column%}
-		<td>{{item}}</td>
-		{%endfor%}
-	</tr>
-	{%endfor%}
-	</tr>
-	</tbody>
-</table> -->
+Active Filters:<br>
+{%for item in filters%}
+{{item}}
+<br>
+{%endfor%}
+
+<a href="/download/" target="blank"><button class='ui input button'>Download!</button></a>
+
 
 
 

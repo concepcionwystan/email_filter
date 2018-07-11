@@ -1,6 +1,7 @@
 from flaskext.mysql import MySQL
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template,send_file
 import datetime as dt
+import csv
 
 
 
@@ -22,19 +23,28 @@ def hello():
   # data = cursor.fetchmany(1000)
   return render_template("index.html")
 
-@app.route("/filter",methods=["GET"])
+@app.route('/download/')
+def download():
+	try:
+		return send_file('results.csv', attachment_filename='results.csv',as_attachment = True)
+	except Exception as e:
+		return str(e)
+
+@app.route("/filter",methods=["POST"])
 def search():
 
-	domain = request.args.get("domain")
-	version = request.args.get("version")
-	status = request.args.get("status")
-	platform_version = request.args.get("platform_version")
-	license = request.args.get("license")
-	os = request.args.getlist("os")
-	multiple = request.args.get("multiple")
-	start = request.args.get("start")
-	end = request.args.get("end")
+	domain = request.form.get("domain")
+	version = request.form.get("version")
+	status = request.form.get("status")
+	platform_version = request.form.get("platform_version")
+	license = request.form.get("license")
+	os = request.form.getlist("os")
+	multiple = request.form.get("multiple")
+	start = request.form.get("start")
+	end = request.form.get("end")
 
+	filters=[]
+	filters.extend([domain,version,status,platform_version,license,os,multiple,start,end])
 
 	
 
@@ -52,7 +62,6 @@ def search():
 
 
 
-	# domain = "" if request.args.get("domain") == "" else "and email like '%" + request.args.get("domain") + "'"
 
 	if license == "" and status == "":
 		subscriptionsQuery = ""
@@ -61,8 +70,9 @@ def search():
 		statusQuery = "" if status == "" else " status = '" + status + "' and"
 		subscriptionsQuery = "SELECT user_id from subscriptions WHERE" + licenseQuery + statusQuery
 		subscriptionsQuery = subscriptionsQuery[:-4]
-	# license = "" if request.args.get("license") == "" else "type = '" + request.args.get("license") + "'"
-	# query = "SELECT user_id,id,type,status from subscriptions WHERE " + license
+	
+	if multiple == "on":
+		subscriptionsQuery = subscriptionsQuery + " group by user_id having count(user_id) > 1"
 
 	query = "SELECT email,user_id,subscription_id,name,created_at from accounts WHERE "
 	if devicesQuery != "":
@@ -90,20 +100,44 @@ def search():
 		query = query + "created_at" + endQuery + " and "
 
 
+	if query == "SELECT email,user_id,subscription_id,name,created_at from accounts WHERE ":
+		query = "SELECT email,user_id,subscription_id,name,created_at from accounts"
+		conn = mysql.connect()
+		cursor = conn.cursor()
+		cursor.execute(query)
+		data = cursor.fetchmany(5000)
+		with open('results.csv', 'w') as csvfile:
+			fieldnames = ['email', 'user_id', 'subscription_id','name','created_at']
+			writer = csv.writer(csvfile)
+			writer.writerow(fieldnames)
+			for item in data:
+				writer.writerow(item)
+	else:
+		query = query[:-4]
+		print(query)
+		conn = mysql.connect()
+		cursor = conn.cursor()
+		cursor.execute(query)
+		data = cursor.fetchall()
+		with open('results.csv', 'w') as csvfile:
+			fieldnames = ['email', 'user_id', 'subscription_id','name','created_at']
+			writer = csv.writer(csvfile)
+			writer.writerow(fieldnames)
+			for item in data:
+				# print(item[1])
+				query = "SELECT platform from devices where user_id=" + item[1]
+				# print(query)
+				cursor.execute(query)
+				os=cursor.fetchall()
+				# print(os)
+				writer.writerow(item)
 
+	return render_template("filter.html",data=data,domain=domain,filters=filters)
+	# try:
+	# 	return send_file('results.csv', attachment_filename='results.csv')
+	# except Exception as e:
+	# 	return str(e)
 
-
-	query = query[:-4]
-
-	print(query)
-
-	conn = mysql.connect()
-	cursor = conn.cursor()
-	cursor.execute(query)
-	data = cursor.fetchall()
-
-
-	return render_template("filter.html",data=data)
 
 if __name__ == "__main__":
   app.run(debug=True)

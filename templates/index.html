@@ -2,9 +2,33 @@
 <html lang="en">
 <head>
     <title>CSV Generator</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/index.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.13/dist/semantic.min.css"/>
+    
+
     <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
-<script src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
+    <script src="https://cdn.rawgit.com/mdehoog/Semantic-UI/6e6d051d47b598ebab05857545f242caf2b4b48c/dist/semantic.min.js"></script>
+    <style>
+      .container {
+    display: table;
+    height: 100%;
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+}
+.helper {
+    #position: absolute;
+    #top: 40%;
+    display: table-cell;
+    vertical-align: middle;
+}
+.content {
+    #position: relative;
+    #top: -10%;
+    margin: auto;
+    width: 1000px;
+}
+    </style>
 </head>
 
 
@@ -37,69 +61,83 @@
 	</tbody>
 </table> -->
 
-<form method="GET" action="./filter">
+<div class="container">
+    <div class="helper">
+        <div class="content">
+            <form method="POST" action="./filter">
   <div class="ui form">
-  <div class="fields">
-    <div class="two wide field">
-      <label>Domain</label>
-      <input type="text" placeholder="@insynchq.com" name="domain">
+
+    <div class="fields">
+      <div class="four wide field">
+        <label>Domain</label>
+        <input type="text" placeholder="@insynchq.com" name="domain">
+      </div>
+      <div class="four wide field">
+        <label>Insync version</label>
+        <input type="text" placeholder="2.5" name="version">
+      </div>
+      <div class="four wide field">
+        <label>Trial status</label>
+        <input type="text" placeholder="active" name="status">
+      </div>
     </div>
-    <div class="two wide field">
-      <label>Insync version</label>
-      <input type="text" placeholder="2.5" name="version">
-    </div>
-    <div class="two wide field">
-      <label>Trial status</label>
-      <input type="text" placeholder="active" name="status">
-    </div>
-  </div>
-  <div class="fields">
-    <div class="two wide field">
-      <label>Platform version</label>
-      <input type="text" placeholder="Ubuntu 16.04" name="platform_version">
-    </div>
-    <div class="two wide field">
-      <label>Start date</label>
-      <div class="ui calendar" id="rangestart">
-        <div class="ui input left icon">
-          <i class="calendar icon"></i>
-          <input type="text" placeholder="Start" name="start">
+
+    <div class="fields">
+      <div class="four wide field">
+        <label>Platform version</label>
+        <input type="text" placeholder="Ubuntu 16.04" name="platform_version">
+      </div>
+      <div class="four wide field">
+        <label>Start date</label>
+        <div class="ui calendar" id="rangestart">
+          <div class="ui input left icon">
+            <i class="calendar icon"></i>
+            <input type="text" placeholder="Start" name="start">
+          </div>
+        </div>
+      </div>
+      <div class="four wide field">
+        <label>End date</label>
+        <div class="ui calendar" id="rangeend">
+          <div class="ui input left icon">
+              <i class="calendar icon"></i>
+              <input type="text" placeholder="End" name="end">
+            </div>
         </div>
       </div>
     </div>
-    <div class="two wide field">
-      <label>End date</label>
-      <div class="ui calendar" id="rangeend">
-        <div class="ui input left icon">
-            <i class="calendar icon"></i>
-            <input type="text" placeholder="End" name="end">
-          </div>
+
+    <div class="fields">
+      <div class="four wide field">
+        <label>License</label>
+        <input type="text" placeholder="Pro" name="license">
       </div>
-    </div>
-  </div>
-  <div class="fields">
-    <div class="two wide field">
-      <label>License</label>
-      <input type="text" placeholder="Pro" name="license">
-    </div>
-    <div class="three wide field">
-      <label>OS</label>
-      <select name="os" multiple="" class="ui fluid dropdown">
-        <option value="">Windows</option>
-        <option value="win">Windows</option>
-        <option value="linux">Linux</option>
-        <option value="macOS">Mac OS</option>
-      </select>
-    </div>
-    <div class="inline field">
-      <div class="ui checkbox">
-        <input type="checkbox" tabindex="0" class="hidden" name="multiple">
+      <div class="six wide field">
+        <label>OS</label>
+        <select name="os" multiple="" class="ui fluid dropdown">
+          <option value="">Windows</option>
+          <option value="win">Windows</option>
+          <option value="linux">Linux</option>
+          <option value="macOS">Mac OS</option>
+        </select>
+      </div>
+      <div class="one wide field">
         <label>Multiple accounts</label>
+        <div class="ui toggle checkbox">
+          <input type="checkbox" tabindex="0" class="hidden" name="multiple">
+        </div>
       </div>
+    </div>
+
+    <input type="submit" class="ui button" value="Search">
   </div>
-  </div>
-  <input type="submit" class="ui button" value="Search">
+</form>
+        </div>
+    </div>
 </div>
+
+
+
 
 
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
