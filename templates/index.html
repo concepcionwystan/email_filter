@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <title>CSV Generator</title>
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/index.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.13/dist/semantic.min.css"/>
     
 
@@ -64,74 +63,128 @@
 <div class="container">
     <div class="helper">
         <div class="content">
-            <form method="POST" action="./filter">
-  <div class="ui form">
+            <form method="POST" action="./filter" autoComplete="off">
+              <div class="ui form">
 
-    <div class="fields">
-      <div class="four wide field">
-        <label>Domain</label>
-        <input type="text" placeholder="@insynchq.com" name="domain">
-      </div>
-      <div class="four wide field">
-        <label>Insync version</label>
-        <input type="text" placeholder="2.5" name="version">
-      </div>
-      <div class="four wide field">
-        <label>Trial status</label>
-        <input type="text" placeholder="active" name="status">
-      </div>
-    </div>
+                <div class="fields">
+                  <div class="four wide field">
+                    <label>Domain</label>
+                    <input type="text" placeholder="@insynchq.com" name="domain">
+                  </div>
+                  <div class="four wide field">
+                    <label>Insync version</label>
+                    <div class = "ui fluid search selection dropdown">
+                      <input type="hidden" placeholder="2.5" name="version">
+                      <i class = "dropdown-icon"></i>
+                      <div class="default text">Select version</div>
+                      <div class="menu">
+                        <div class="item" data-value = "1.4.1.37027">1.4.1.37027</div>
+                        <div class="item" data-value = "1.4.9.37119">1.4.9.37119</div>
+                        <div class="item" data-value = "1.0.27.31715">1.0.27.31715</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="four wide field">
+                    <label>Trial status</label>
+                     <div class = "ui fluid search selection dropdown">
+                      <input type="hidden" placeholder="active" name="status">
+                      <i class = "dropdown-icon"></i>
+                      <div class="default text">Select status</div>
+                      <div class="menu">
+                        <div class="item" data-value = "active">active</div>
+                        <div class="item" data-value = "canceled">canceled</div>
+                        <div class="item" data-value = "expired">expired</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-    <div class="fields">
-      <div class="four wide field">
-        <label>Platform version</label>
-        <input type="text" placeholder="Ubuntu 16.04" name="platform_version">
-      </div>
-      <div class="four wide field">
-        <label>Start date</label>
-        <div class="ui calendar" id="rangestart">
-          <div class="ui input left icon">
-            <i class="calendar icon"></i>
-            <input type="text" placeholder="Start" name="start">
-          </div>
-        </div>
-      </div>
-      <div class="four wide field">
-        <label>End date</label>
-        <div class="ui calendar" id="rangeend">
-          <div class="ui input left icon">
-              <i class="calendar icon"></i>
-              <input type="text" placeholder="End" name="end">
-            </div>
-        </div>
-      </div>
-    </div>
+                <div class="fields">
+                  <div class="four wide field">
+                    <label>Platform version</label>
+                    <input type="text" placeholder="Ubuntu 16.04" name="platform_version">
+                  </div>
+                  <div class="four wide field">
+                    <label>Start date</label>
+                    <div class="ui calendar" id="rangestart">
+                      <div class="ui input left icon">
+                        <i class="calendar icon"></i>
+                        <input type="text" placeholder="Start" name="start">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="four wide field">
+                    <label>End date</label>
+                    <div class="ui calendar" id="rangeend">
+                      <div class="ui input left icon">
+                          <i class="calendar icon"></i>
+                          <input type="text" placeholder="End" name="end">
+                        </div>
+                    </div>
+                  </div>
+                </div>
 
-    <div class="fields">
-      <div class="four wide field">
-        <label>License</label>
-        <input type="text" placeholder="Pro" name="license">
-      </div>
-      <div class="six wide field">
-        <label>OS</label>
-        <select name="os" multiple="" class="ui fluid dropdown">
-          <option value="">Windows</option>
-          <option value="win">Windows</option>
-          <option value="linux">Linux</option>
-          <option value="macOS">Mac OS</option>
-        </select>
-      </div>
-      <div class="one wide field">
-        <label>Multiple accounts</label>
-        <div class="ui toggle checkbox">
-          <input type="checkbox" tabindex="0" class="hidden" name="multiple">
-        </div>
-      </div>
-    </div>
-
-    <input type="submit" class="ui button" value="Search">
-  </div>
-</form>
+                <div class="fields">
+                  <div class="four wide field">
+                    <label>License</label>
+                    <div class = "ui fluid search selection dropdown">
+                      <input type="hidden" placeholder="Pro" name="license">
+                      <i class = "dropdown-icon"></i>
+                      <div class="default text">Select type</div>
+                      <div class="menu">
+                        <div class="item" data-value = "Plus">Plus</div>
+                        <div class="item" data-value = "Prime">Prime</div>
+                        <div class="item" data-value = "Pro">Pro</div>
+                        <div class="item" data-value = "Business">Business</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="six wide field">
+                    <label>OS</label>
+                    <select name="os" multiple="" class="ui fluid dropdown">
+                      <option value="">Windows</option>
+                      <option value="win">Windows</option>
+                      <option value="linux">Linux</option>
+                      <option value="macOS">Mac OS</option>
+                    </select>
+                  </div>
+                  <div class="one wide field">
+                    <label>Multiple accounts</label>
+                    <div class="ui toggle checkbox">
+                      <input type="checkbox" tabindex="0" class="hidden" name="multiple">
+                    </div>
+                  </div>
+                  <div class="one wide field">
+                    <label>Remove unsubs</label>
+                    <div class="ui toggle checkbox">
+                      <input type="checkbox" tabindex="0" class="hidden" name="unsubs">
+                    </div>
+                  </div>
+                </div>
+                <div class="inline fields">
+                  <label>Custom Fields</label>
+                  <div class="two wide field">
+                    <div class="ui checkbox">
+                      <label>First name</label>
+                      <input type="checkbox" tabindex="0" class="hidden" name="first_name">
+                    </div>
+                  </div>
+                  <div class="two wide field">
+                    <div class="ui checkbox">
+                      <label>Last name</label>
+                      <input type="checkbox" tabindex="0" class="hidden" name="last_name">
+                    </div>
+                  </div>
+                  <div class="two wide field">
+                    <div class="ui checkbox">
+                      <label>License Type</label>
+                      <input type="checkbox" tabindex="0" class="hidden" name="license_type">
+                    </div>
+                  </div>
+                </div>
+                <input type="submit" class="ui button" value="Search">
+              </div>
+            </form>
         </div>
     </div>
 </div>

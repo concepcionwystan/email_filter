@@ -14,10 +14,10 @@
 <table id = "example" class = "ui celled table">
 	<thead>
 		<tr>
-			<td>email</td>
 			<td>user id</td>
-			<td>subscription id</td>
 			<td>name</td>
+			<td>email</td>
+			<td>platforms</td>
 			<td>created at</td>
 		</tr>
 	</thead>
@@ -33,13 +33,14 @@
 	</tbody>
 </table>
 
-Active Filters:<br>
 {%for item in filters%}
-{{item}}
-<br>
+<div class="ui large label">
+<i class="tag icon"></i>{{item}} </div>
 {%endfor%}
 
-<a href="/download/" target="blank"><button class='ui input button'>Download!</button></a>
+<br><br>
+
+<a href="/download/" target="blank"><button class='ui primary button'>Download</button></a>
 
 
 
